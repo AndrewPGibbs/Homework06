@@ -1,13 +1,14 @@
 const APIKey = "f9385a3d1330702c97d30400e846f50e";
-var city = "Orlando";
+var city = "";
 var lat = "";
 var lon = "";
-const searchButton = document.getElementById("#searchButton");
-// searchButton.addEventListener("click", getCoordinatesFromOpenWeatherMap);
-// searchButton.addEventListener("click", getForecastWeatherFromOpenWeatherMap);
+const searchButton = document.getElementById("searchButton");
+
+searchButton.addEventListener("click", getCoordinatesFromOpenWeatherMap);
 
 
-//this is the currect weather for the search query
+
+
 
 function getCoordinatesFromOpenWeatherMap(city) {
     var geocodingUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}`
@@ -26,9 +27,7 @@ function getCoordinatesFromOpenWeatherMap(city) {
         console.log(error);
     })
 }
-
-//this is the projected forecast for the search query
-getCoordinatesFromOpenWeatherMap(city);
+// getCoordinatesFromOpenWeatherMap(city);
 
 function getForecastWeatherFromOpenWeatherMap(city) {
     var forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIKey}`
