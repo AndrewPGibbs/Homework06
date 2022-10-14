@@ -1,7 +1,7 @@
 const APIKey = "f9385a3d1330702c97d30400e846f50e";
-var city ="orlando" //document.getElementById("city").value;
-var lat = "28.5383";
-var lon = "-81.3792";
+
+var lat = "";
+var lon = "";
 const searchButton = document.getElementById("searchButton");
 
 
@@ -9,6 +9,7 @@ const searchButton = document.getElementById("searchButton");
 
 
 function getCoordinatesFromOpenWeatherMap(city){
+    var city = document.getElementById("city").value;
     var geocodingUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}`
     
     fetch(geocodingUrl)
