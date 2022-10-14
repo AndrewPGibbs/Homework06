@@ -1,11 +1,11 @@
 const APIKey = "f9385a3d1330702c97d30400e846f50e";
-var city = "";
+var city = document.getElementById("city").value;
 var lat = "";
 var lon = "";
 const searchButton = document.getElementById("searchButton");
 
-searchButton.addEventListener("click", getCoordinatesFromOpenWeatherMap);
-
+// searchButton.addEventListener("click", getCoordinatesFromOpenWeatherMap);
+searchButton.addEventListener("click", () => getCoordinatesFromOpenWeatherMap(city));
 
 
 
@@ -26,6 +26,7 @@ function getCoordinatesFromOpenWeatherMap(city) {
     .catch( function (error){
         console.log(error);
     })
+    console.log(city);
 }
 // getCoordinatesFromOpenWeatherMap(city);
 
