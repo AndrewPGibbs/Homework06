@@ -8,14 +8,22 @@ var largeHeading = document.getElementById('searchResult');
 // searchButton.addEventListener("click", getCoordinatesFromOpenWeatherMap);
 // searchButton.addEventListener("click", () => getCoordinatesFromOpenWeatherMap(city));
 
-
+function fiveDayForecast(data) {
+    
+    for (let i = 0; i< 4; i++) { 
+    document.getElementById(`temp${i}`).textContent = "Temperature : "+ (Math.round(((data.list[i].main.temp - 273.15) * 9/5 + 32)))+ " degrees Farenheit";
+    document.getElementById(`hum${i}`).textContent = "Humidity : "+ data.list[i].main.humidity+ "%";
+    document.getElementById(`wind${i}`).textContent = "Wind speeds : "+ data.list[i].wind.speed+ "mph"
+    }
+}
  function sendDataToPage(data) {
     cityName = data.name;
     farenheightTemp = parseFloat(data.main.temp)
     largeHeading.textContent = cityName;
     console.log("console log from sendDataToPage function")
-    document.getElementById('temp-main').textContent = "Temperature is "+ (Math.round(((farenheightTemp - 273.15) * 9/5 + 32)))+ " degrees Farenheit"
-
+    document.getElementById('temp-main').textContent = "Temperature : "+ (Math.round(((farenheightTemp - 273.15) * 9/5 + 32)))+ " degrees Farenheit";
+    document.getElementById('hum-main').textContent = "Humidity : "+ data.main.humidity + "%";
+    document.getElementById('wind-main').textContent = "Wind speeds : "+ data.wind.speed+ "mph"
  }
  function temperatureConverter(valNum) {
     valNum = parseFloat(valNum);
@@ -29,7 +37,7 @@ function getCoordinatesFromOpenWeatherMap(city) {
         return response.json();
     })
     .then(function (data){
-        console.log("city = ", city, "data = ", data)
+        // console.log("city = ", city, "data = ", data)
         lat = data.coord.lat;
         lon = data.coord.lon;
         sendDataToPage(data);
@@ -52,10 +60,11 @@ function getForecastWeatherFromOpenWeatherMap(city) {
         return response.json();
     })
     .then(function (data){
-        // console.log("city = ", city, "data = ", data)
+        console.log("city = ", city, "data = ", data)
+        fiveDayForecast(data);
     })
     .catch( function (error){
         console.log(error);
     })
-
+    
 }
