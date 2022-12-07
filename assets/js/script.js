@@ -9,29 +9,38 @@ var largeHeading = document.getElementById('searchResult');
 // searchButton.addEventListener("click", () => getCoordinatesFromOpenWeatherMap(city));
 
 
- function sendDataToPage() {
-    largeHeading.textContent = city;
+ function sendDataToPage(data) {
+    cityName = data.name;
+    farenheightTemp = parseFloat(data.main.temp)
+    largeHeading.textContent = cityName;
     console.log("console log from sendDataToPage function")
- }
+    document.getElementById('temp-main').textContent = "Temperature is "+ (Math.round(((farenheightTemp - 273.15) * 9/5 + 32)))+ " degrees Farenheit"
 
+ }
+ function temperatureConverter(valNum) {
+    valNum = parseFloat(valNum);
+    document.getElementById("outputFahrenheit").innerHTML=((valNum-273.15)*1.8)+32;
+  }
 function getCoordinatesFromOpenWeatherMap(city) {
     var geocodingUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}`
 
     fetch(geocodingUrl)
-    .then(function (response){
+    .then(function (response) {
         return response.json();
     })
     .then(function (data){
         console.log("city = ", city, "data = ", data)
         lat = data.coord.lat;
         lon = data.coord.lon;
-        getForecastWeatherFromOpenWeatherMap(city)
+        sendDataToPage(data);
+   
+        getForecastWeatherFromOpenWeatherMap(data)
     })
     .catch( function (error){
         console.log(error);
     })
     console.log(city);
-    sendDataToPage(city);
+    
 }
 getCoordinatesFromOpenWeatherMap(city);
 
@@ -43,7 +52,7 @@ function getForecastWeatherFromOpenWeatherMap(city) {
         return response.json();
     })
     .then(function (data){
-        console.log("city = ", city, "data = ", data)
+        // console.log("city = ", city, "data = ", data)
     })
     .catch( function (error){
         console.log(error);
