@@ -1,14 +1,18 @@
 const APIKey = "f9385a3d1330702c97d30400e846f50e";
-var city = document.getElementById("city").value;
+var city = "orlando";//document.getElementById("city").value;
 var lat = "";
 var lon = "";
-const searchButton = document.getElementById("searchButton");
+var largeHeading = document.getElementById('searchResult');
+// const searchButton = document.getElementById("searchButton");
 
 // searchButton.addEventListener("click", getCoordinatesFromOpenWeatherMap);
-searchButton.addEventListener("click", () => getCoordinatesFromOpenWeatherMap(city));
+// searchButton.addEventListener("click", () => getCoordinatesFromOpenWeatherMap(city));
 
 
-
+ function sendDataToPage() {
+    largeHeading.textContent = city;
+    console.log("console log from sendDataToPage function")
+ }
 
 function getCoordinatesFromOpenWeatherMap(city) {
     var geocodingUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}`
@@ -27,8 +31,9 @@ function getCoordinatesFromOpenWeatherMap(city) {
         console.log(error);
     })
     console.log(city);
+    sendDataToPage(city);
 }
-// getCoordinatesFromOpenWeatherMap(city);
+getCoordinatesFromOpenWeatherMap(city);
 
 function getForecastWeatherFromOpenWeatherMap(city) {
     var forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIKey}`
@@ -43,4 +48,5 @@ function getForecastWeatherFromOpenWeatherMap(city) {
     .catch( function (error){
         console.log(error);
     })
+
 }
