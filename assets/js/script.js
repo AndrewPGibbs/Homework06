@@ -9,8 +9,8 @@ var largeHeading = document.getElementById('searchResult');
 // searchButton.addEventListener("click", () => getCoordinatesFromOpenWeatherMap(city));
 
 function fiveDayForecast(data) {
-    
-    for (let i = 0; i< 4; i++) { 
+
+    for (let i = 1; i< 6; i++) { 
     document.getElementById(`temp${i}`).textContent = "Temperature : "+ (Math.round(((data.list[i].main.temp - 273.15) * 9/5 + 32)))+ " degrees Farenheit";
     document.getElementById(`hum${i}`).textContent = "Humidity : "+ data.list[i].main.humidity+ "%";
     document.getElementById(`wind${i}`).textContent = "Wind speeds : "+ data.list[i].wind.speed+ "mph"
