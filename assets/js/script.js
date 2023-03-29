@@ -1,5 +1,5 @@
 const APIKey = "f9385a3d1330702c97d30400e846f50e";
-var city = document.getElementById("city-name").value;
+const city = document.getElementById("city-name").textContent;
 var lat = "";
 var lon = "";
 var largeHeading = document.getElementById('searchResult');
@@ -22,16 +22,14 @@ function fiveDayForecast(data) {
     cityName = document.getElementById("city-name").value
     cityNameUppercase = cityName.charAt(0).toUpperCase() + cityName.slice(1).toLowerCase();
     largeHeading.textContent =cityNameUppercase
-    console.log(largeHeading)
-
      
-    console.log("console log from sendDataToPage function")
     document.getElementById('temp-main').textContent = "Temperature : "+ (Math.round(((farenheightTemp - 273.15) * 9/5 + 32)))+ " degrees Farenheit";
     document.getElementById('hum-main').textContent = "Humidity : "+ data.main.humidity + "%";
     document.getElementById('wind-main').textContent = "Wind speeds : "+ data.wind.speed+ "mph"
  }
 
 function getCoordinatesFromOpenWeatherMap() {
+    console.log('first function log: city', city)
     var geocodingUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}`
     fetch(geocodingUrl)
     .then(function (response) {
